@@ -1,5 +1,7 @@
 import tensorflow as tf
+
 tf.compat.v1.disable_eager_execution()
+
 
 class TCNNConfig(object):
     """CNN配置参数"""
@@ -45,7 +47,8 @@ class TextCNN(object):
 
         with tf.name_scope("cnn"):
             # CNN layer
-            conv = tf.compat.v1.layers.conv1d(embedding_inputs, self.config.num_filters, self.config.kernel_size, name='conv')
+            conv = tf.compat.v1.layers.conv1d(embedding_inputs, self.config.num_filters, self.config.kernel_size,
+                                              name='conv')
             # global max pooling layer
             gmp = tf.compat.v1.reduce_max(conv, reduction_indices=[1], name='gmp')
 

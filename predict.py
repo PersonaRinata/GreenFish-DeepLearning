@@ -44,10 +44,10 @@ class CnnModel:
         return self.categories[y_pred_cls[0]]
 
 app = Flask(__name__)
-
+app.config['TIMEOUT'] = 60
+cnn_model = CnnModel()
 @app.route('/predict', methods=['POST'])
 def predict():
-    cnn_model = CnnModel()
     # 从请求中获取数据
     input_data = request.form.get('input')
     # 使用模型进行预测
