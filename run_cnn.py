@@ -13,13 +13,13 @@ import tensorflow as tf
 from sklearn import metrics
 
 from cnn_model import TCNNConfig, TextCNN
-from data.cnews_loader import read_vocab, read_category, batch_iter, process_file, build_vocab
+from data.word_loader import read_vocab, read_category, batch_iter, process_file, build_vocab
 
-base_dir = 'data/cnews'
-train_dir = os.path.join(base_dir, 'cnews.train.txt')
-test_dir = os.path.join(base_dir, 'cnews.test.txt')
-val_dir = os.path.join(base_dir, 'cnews.val.txt')
-vocab_dir = os.path.join(base_dir, 'cnews.vocab.txt')
+base_dir = 'data'
+train_dir = os.path.join(base_dir, 'word_train.txt')
+test_dir = os.path.join(base_dir, 'word_test.txt')
+val_dir = os.path.join(base_dir, 'word_val.txt')
+vocab_dir = os.path.join(base_dir, 'word_vocab.txt')
 
 save_dir = 'checkpoints/textcnn'
 save_path = os.path.join(save_dir, 'best_validation')  # 最佳验证结果保存路径
@@ -110,8 +110,7 @@ def train():
                 # 每多少轮次输出在训练集和验证集上的性能
                 feed_dict[model.keep_prob] = 1.0
                 loss_train, acc_train = session.run([model.loss, model.acc], feed_dict=feed_dict)
-                loss_val, acc_val = evaluate(session, x_val, y_val)  # todo
-
+                loss_val, acc_val = evaluate(session, x_val, y_val)
                 if acc_val > best_acc_val:
                     # 保存最好结果
                     best_acc_val = acc_val

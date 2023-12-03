@@ -1,5 +1,5 @@
 .DS_Store
-data/cnews
+data/word
 data/thucnews
 __pycache__
 cnn_keras.py
@@ -10,3 +10,9 @@ tensorboard
 .vscode
 
 *.png
+
+*.txt
+
+helper/
+
+info/

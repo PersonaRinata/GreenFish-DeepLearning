@@ -1,19 +1,17 @@
-# coding: utf-8
-
 from __future__ import print_function
+from flask import Flask, jsonify, request
+
 
 import os
 import tensorflow as tf
 
-
 from cnn_model import TCNNConfig, TextCNN
-from data.cnews_loader import read_category, read_vocab
-
+from data.word_loader import read_category, read_vocab
 
 unicode = str
 
-base_dir = 'data/cnews'
-vocab_dir = os.path.join(base_dir, 'cnews.vocab.txt')
+base_dir = 'data'
+vocab_dir = os.path.join(base_dir, 'word_vocab.txt')
 
 save_dir = 'checkpoints/textcnn'
 save_path = os.path.join(save_dir, 'best_validation')  # 最佳验证结果保存路径
@@ -45,10 +43,23 @@ class CnnModel:
         y_pred_cls = self.session.run(self.model.y_pred_cls, feed_dict=feed_dict)
         return self.categories[y_pred_cls[0]]
 
+app = Flask(__name__)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    cnn_model = CnnModel()
+    # 从请求中获取数据
+    input_data = request.form.get('input')
+    # 使用模型进行预测
+    result = cnn_model.predict([input_data])
+    # 返回预测结果
+    return jsonify({'result': result})
 
 if __name__ == '__main__':
-    cnn_model = CnnModel()
-    test_demo = ['衣服特别的好看',
-                 '热火vs骑士前瞻：皇帝回乡二番战 东部次席唾手可得新浪体育讯北京时间3月30日7:00']
-    for i in test_demo:
-        print(cnn_model.predict(i))
+    app.run(debug=True)
+# if __name__ == '__main__':
+#     cnn_model = CnnModel()
+#     input = '我老婆怀孕了但在不知情的情况下，服用了迪康肤痒颗粒这个药，我想问一下影响大不大，到院就诊我该挂哪个科？'
+#     test_demo = [input]
+#     answer = cnn_model.predict(0)
+#     print(answer)
