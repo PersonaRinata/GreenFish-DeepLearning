@@ -1,8 +1,8 @@
 import os
 
 # 读取原始文件
-file = "word_test.txt"
-path =os.path.join("word",file)
+file = "word_val.txt"
+path = os.path.join("word", file)
 
 with open(path, 'r') as f:
     lines = f.readlines()
@@ -18,6 +18,7 @@ field_mapping = {
     "风湿免疫科": "其他",
     "精神心理科": "其他",
     "整形科": "其他",
+    "疫苗科": "其他"
 }
 categories = set()  # 用于记录不同的种类
 # 修改第一个字段并生成新文件内容
@@ -38,11 +39,10 @@ for line in lines:
         modified_field = first_field
 
     fields[0] = modified_field
-
-    new_line = '\t'.join(fields)  # 将修改后的字段重新组合成一行
-    new_lines.append(new_line)
-
-    categories.add(modified_field)  # 将修改后的字段添加到集合中
+    if fields[0] != '其他':
+        new_line = '\t'.join(fields)  # 将修改后的字段重新组合成一行
+        new_lines.append(new_line)
+        categories.add(modified_field)  # 将修改后的字段添加到集合中
 
 print(len(categories))
 print(categories)
