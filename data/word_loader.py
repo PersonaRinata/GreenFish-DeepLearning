@@ -48,7 +48,7 @@ def read_vocab(vocab_dir):
 def read_category():
     """读取分类目录，固定"""
     categories = ['疼痛科 麻醉科', '儿科', '内分泌科', '急诊科', '骨科', '皮肤科', '妇产科', '内科', '感染科 传染科',
-                  '肿瘤科', '眼科', '性病科', '外科', '其他']
+                  '肿瘤科', '眼科', '性病科', '外科']
 
     categories = [x for x in categories]
 

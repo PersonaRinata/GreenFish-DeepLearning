@@ -16,3 +16,7 @@ tensorboard
 helper/
 
 info/
+
+record/
+
+data/deal.py
