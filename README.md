@@ -4,7 +4,7 @@
 
 数据集来源： https://github.com/kklyyl/word2vec-text-cnn ，但并未参考其方案；同时对部分类别进行归并，最终得到13个类别。
 
-项目源码： https://github.com/withoutabc/cn_text_classify
+项目源码： https://github.com/PersonaRinata/GreenFish-DeepLearning
 
 ## CNN（卷积神经网络）
 

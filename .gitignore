@@ -9,7 +9,7 @@ checkpoints
 tensorboard
 .vscode
 
-*.png
+
 
 *.txt
 
